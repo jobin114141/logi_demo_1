@@ -31,28 +31,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Active section highlight via IntersectionObserver
   const navSections = ['about', 'services', 'operations', 'testimonials'];
-  const navLinks = {};
+
+  // Map each section id → ALL its nav links (desktop + mobile)
+  const navLinksMap = {};
   navSections.forEach(id => {
-    navLinks[id] = document.querySelector(`#main-nav a[href="#${id}"]`);
+    navLinksMap[id] = Array.from(document.querySelectorAll(`#main-nav a[href="#${id}"]`));
   });
+
+  const mobileBrandLabel = document.getElementById('mobile-brand-label');
+  const mobileActiveDot = document.getElementById('mobile-active-dot');
+
+  function setActiveSection(activeId) {
+    navSections.forEach(id => {
+      navLinksMap[id].forEach(link => {
+        if (id === activeId) {
+          link.classList.add('nav-active');
+        } else {
+          link.classList.remove('nav-active');
+        }
+      });
+    });
+    // Update mobile brand label + dot
+    const labels = { about: 'About', services: 'Services', operations: 'Operations', testimonials: 'Testimonials' };
+    if (mobileBrandLabel) {
+      mobileBrandLabel.textContent = activeId ? (labels[activeId] || 'Connect') : 'Connect';
+    }
+    if (mobileActiveDot) {
+      mobileActiveDot.style.opacity = activeId ? '1' : '0';
+    }
+  }
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      const link = navLinks[entry.target.id];
-      if (!link) return;
       if (entry.isIntersecting) {
-        // Remove active from all, then set on this one
-        Object.values(navLinks).forEach(l => l && l.classList.remove('nav-active'));
-        link.classList.add('nav-active');
+        setActiveSection(entry.target.id);
       }
     });
 
-    // If nothing is intersecting (e.g. back at hero), clear all
+    // If back at hero, clear all
     const anyVisible = entries.some(e => e.isIntersecting);
     if (!anyVisible && window.scrollY < 200) {
-      Object.values(navLinks).forEach(l => l && l.classList.remove('nav-active'));
+      setActiveSection(null);
     }
-  }, { threshold: 0.25, rootMargin: '-80px 0px -40% 0px' });
+  }, { threshold: [0.1, 0.25], rootMargin: '-70px 0px -20% 0px' });
 
   navSections.forEach(id => {
     const el = document.getElementById(id);
@@ -61,6 +82,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize Counter Animations on Scroll
   initScrollCounters();
+});
+
+// Mobile nav toggle
+function toggleMobileNav() {
+  const nav = document.getElementById('main-nav');
+  const menu = document.getElementById('mobile-nav-menu');
+  const isOpen = nav.classList.contains('mobile-open');
+  if (isOpen) {
+    closeMobileNav();
+  } else {
+    nav.classList.add('mobile-open');
+    menu.classList.add('nav-menu-open');
+  }
+}
+
+function closeMobileNav() {
+  const nav = document.getElementById('main-nav');
+  const menu = document.getElementById('mobile-nav-menu');
+  nav.classList.remove('mobile-open');
+  menu.classList.remove('nav-menu-open');
+}
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+  const nav = document.getElementById('main-nav');
+  if (nav && !nav.contains(e.target)) {
+    closeMobileNav();
+  }
 });
 
 // 2. Mobile Menu Toggle
@@ -213,7 +262,7 @@ function searchTracking() {
 
 function renderTrackingDetails(shipment, box) {
   box.classList.remove('hidden');
-  
+
   let stepsHTML = shipment.steps.map(step => `
     <div class="flex items-start gap-4 relative">
       <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shrink-0 z-10 

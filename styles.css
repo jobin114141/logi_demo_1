@@ -5,6 +5,117 @@
   font-size: 0.8125rem;
   gap: 1.75rem;
 }
+
+/* ── Burger bars ── */
+.nav-burger-bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
+  transition: background 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+#main-nav.scrolled .nav-burger-bar {
+  background: rgba(15, 15, 15, 0.8);
+}
+
+/* Open state — bars animate to X */
+#main-nav.mobile-open .nav-burger-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+#main-nav.mobile-open .nav-burger-bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+#main-nav.mobile-open .nav-burger-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile brand label + dot: go dark when scrolled over light sections */
+#main-nav.scrolled #mobile-brand-label {
+  color: rgba(15, 15, 15, 0.88) !important;
+}
+
+#main-nav.scrolled #mobile-active-dot {
+  background: #1a7a04;
+  box-shadow: none;
+}
+
+/* ── Mobile dropdown glass panel ── */
+.glass-nav-mobile {
+  background: rgba(15, 15, 20, 0.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+#main-nav.scrolled .glass-nav-mobile {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Open state */
+.glass-nav-mobile.nav-menu-open {
+  max-height: 260px;
+  opacity: 1;
+}
+
+/* ── Mobile nav items ── */
+.mobile-nav-item {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 3px solid transparent;
+  transition: background 0.15s ease, color 0.15s ease, border-left-color 0.15s ease;
+}
+
+.mobile-nav-item:last-child {
+  border-bottom: none;
+}
+
+.mobile-nav-item:hover {
+  background: rgba(66, 230, 26, 0.1);
+  color: #42e61a !important;
+  text-shadow: none;
+}
+
+/* Active state in mobile dropdown — left green bar + green text */
+.mobile-nav-item.nav-active {
+  background: rgba(66, 230, 26, 0.15) !important;
+  color: #42e61a !important;
+  border-left-color: #42e61a !important;
+  border-radius: 0 !important;
+  padding: 0.75rem 1.5rem !important;
+  margin: 0 !important;
+  text-shadow: none !important;
+}
+
+.mobile-nav-item.nav-active::after {
+  display: none !important;
+}
+
+#main-nav.scrolled .mobile-nav-item {
+  color: rgba(15, 15, 15, 0.85) !important;
+  border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+
+#main-nav.scrolled .mobile-nav-item:hover {
+  color: #1f8a06 !important;
+  background: rgba(31, 138, 6, 0.08);
+}
+
+#main-nav.scrolled .mobile-nav-item.nav-active {
+  background: rgba(66, 230, 26, 0.12) !important;
+  color: #1a7a04 !important;
+  border-left-color: #42e61a !important;
+}
+
 .glass-nav {
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(18px) saturate(180%);
@@ -51,23 +162,29 @@
   text-shadow: 0 0 12px rgba(66, 230, 26, 0.55);
 }
 
-/* Active indicator — green dot below link text */
+/* ── Desktop active: green text + glowing dot (original style) ── */
 .nav-link.nav-active {
-  color: #42e61a;
-  text-shadow: 0 0 10px rgba(66, 230, 26, 0.45);
+  color: #42e61a !important;
+  text-shadow: 0 0 10px rgba(66, 230, 26, 0.5);
+  background: none;
+  border-radius: 0;
+  padding-bottom: 2px;
+  margin: 0;
 }
 
+/* Glowing green dot under the active desktop link */
 .nav-link.nav-active::after {
   content: '';
+  display: block;
   position: absolute;
-  bottom: -5px;
+  bottom: -6px;
   left: 50%;
   transform: translateX(-50%);
   width: 5px;
   height: 5px;
   border-radius: 50%;
   background: #42e61a;
-  box-shadow: 0 0 6px rgba(66, 230, 26, 0.7);
+  box-shadow: 0 0 8px rgba(66, 230, 26, 0.8);
 }
 
 /* Nav links go dark when scrolled over light sections */
@@ -77,17 +194,19 @@
 }
 
 #main-nav.scrolled .nav-link:hover {
-  color: #28a809;
+  color: #1a7a04;
   text-shadow: none;
 }
 
+/* Desktop active — darker green + darker dot when scrolled */
 #main-nav.scrolled .nav-link.nav-active {
-  color: #1f8a06;
+  color: #1a7a04 !important;
   text-shadow: none;
+  background: none;
 }
 
 #main-nav.scrolled .nav-link.nav-active::after {
-  background: #1f8a06;
+  background: #1a7a04;
   box-shadow: none;
 }
 
