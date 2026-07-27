@@ -519,7 +519,7 @@ function renderOperations() {
           </div>
           <div class="flex items-center gap-6">
             <img alt="${op.title}" class="w-36 h-24 object-cover rounded-xl border-2 border-black/20 transform -rotate-3 hidden md:block shadow-xl hover:rotate-0 transition-transform" src="${op.img}" />
-            <span class="bg-slate-950 text-white w-14 h-14 rounded-full flex items-center justify-center font-bold text-2xl group-hover:scale-110 transition-transform">↗</span>
+            <span class="bg-slate-950 text-white w-14 h-14 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
           </div>
         </div>
       `;
@@ -533,7 +533,7 @@ function renderOperations() {
           </div>
           <div class="mt-4 md:mt-0 flex items-center gap-4">
             <span class="text-xs px-3 py-1 bg-white/10 rounded-full text-white/80">${op.badge}</span>
-            <span class="text-xl opacity-40 group-hover:opacity-100 group-hover:translate-x-2 transition-all">↗</span>
+            <span class="opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all"><svg class="w-5 h-5 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
           </div>
         </div>
       `;
