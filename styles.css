@@ -1,0 +1,303 @@
+/* ─── Glassmorphism Navbar ─────────────────────────────────── */
+/* Slightly smaller pill size */
+#main-nav .glass-nav {
+  padding: 0.6rem 2rem;
+  font-size: 0.8125rem;
+  gap: 1.75rem;
+}
+.glass-nav {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    0 1px 0 rgba(255, 255, 255, 0.15) inset;
+  color: #ffffff;
+  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.glass-nav:hover {
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.3),
+    0 1px 0 rgba(255, 255, 255, 0.2) inset;
+}
+
+/* Scrolled state — darker glass + dark text for light-bg sections */
+#main-nav.scrolled .glass-nav {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+}
+
+#main-nav.scrolled .glass-nav:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+  letter-spacing: 0.01em;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-link:hover {
+  color: #42e61a;
+  text-shadow: 0 0 12px rgba(66, 230, 26, 0.55);
+}
+
+/* Active indicator — green dot below link text */
+.nav-link.nav-active {
+  color: #42e61a;
+  text-shadow: 0 0 10px rgba(66, 230, 26, 0.45);
+}
+
+.nav-link.nav-active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #42e61a;
+  box-shadow: 0 0 6px rgba(66, 230, 26, 0.7);
+}
+
+/* Nav links go dark when scrolled over light sections */
+#main-nav.scrolled .nav-link {
+  color: rgba(15, 15, 15, 0.85);
+  text-shadow: none;
+}
+
+#main-nav.scrolled .nav-link:hover {
+  color: #28a809;
+  text-shadow: none;
+}
+
+#main-nav.scrolled .nav-link.nav-active {
+  color: #1f8a06;
+  text-shadow: none;
+}
+
+#main-nav.scrolled .nav-link.nav-active::after {
+  background: #1f8a06;
+  box-shadow: none;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+
+
+/* Root Typography Scaling - Proportional global text size reduction */
+html {
+  font-size: 14.5px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@layer utilities {
+  .huge-title {
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 0.85;
+  }
+
+  .card-rounded {
+    border-radius: 2.25rem;
+  }
+
+  .accent-orange {
+    background-color: #42e61a;
+  }
+
+  .text-accent-orange {
+    color: #42e61a;
+  }
+
+  .dark-section {
+    background-color: #0c0c0c;
+  }
+
+  .pill-badge {
+    border: 1px solid #e5e7eb;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+  }
+}
+
+/* Floating Glassmorphism Pill Navigation & Smart Auto-Hide */
+#main-nav {
+  background-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+  will-change: transform;
+}
+
+#main-nav.nav-hidden {
+  transform: translateY(-130%);
+}
+
+#main-nav.scrolled {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+/* State-of-the-Art Luxury Glass Navigation Pill */
+#main-nav-center {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.2), inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#main-nav.scrolled #main-nav-container {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+#main-nav.scrolled #main-nav-center {
+  background: #000000 !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.6), inset 0 1px 1px 0 rgba(255, 255, 255, 0.2) !important;
+  transform: translateX(-50%) scale(0.96);
+}
+
+.nav-link {
+  font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  padding: 0.5rem 1.1rem;
+  border-radius: 9999px;
+  transition: all 0.25s ease;
+  color: rgba(255, 255, 255, 0.88);
+  display: inline-block;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.18);
+  color: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* After Hero Section (when scrolled): hide left logo and right actions, keeping ONLY center nav pill */
+#main-nav.scrolled #main-nav-logo,
+#main-nav.scrolled #main-nav-actions {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: scale(0.85);
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Modal Open State Styles */
+.modal-active {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.modal-active>div {
+  transform: scale(1) translateY(0) !important;
+}
+
+/* Service Card Filter Hide/Show */
+.service-card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-card.hidden-card {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+  display: none !important;
+}
+
+/* Service Tab Button Active state */
+.service-tab-btn.active {
+  background-color: #0c0c0c !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #42e61a;
+}
+
+/* Pulse Glow Keyframes */
+@keyframes glowPulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(66, 230, 26, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 30px rgba(66, 230, 26, 0.8);
+  }
+}
+
+.glow-orange {
+  animation: glowPulse 3s infinite ease-in-out;
+}
+
+/* Quote Radio Card Checked state */
+.quote-mode-card:has(input:checked) {
+  border-color: #42e61a;
+  background-color: #f0fdf4;
+  box-shadow: 0 4px 14px rgba(66, 230, 26, 0.25);
+}
+
+/* Keyframe Animations */
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDownFade 0.3s ease forwards;
+}
