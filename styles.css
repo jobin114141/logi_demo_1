@@ -433,3 +433,8 @@ html {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
+
+/* Service Card Filter Hide Class */
+.hidden-card {
+  display: none !important;
+}

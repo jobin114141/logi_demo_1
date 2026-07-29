@@ -570,6 +570,45 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// 12. Interactive Liquid Corridor Simulation Vector
+function selectCorridorMode(mode) {
+  const btnAir = document.getElementById('corridor-btn-air');
+  const btnSea = document.getElementById('corridor-btn-sea');
+  const btnLand = document.getElementById('corridor-btn-land');
+
+  const speedEl = document.getElementById('corridor-speed');
+  const customsEl = document.getElementById('corridor-customs');
+  const carbonEl = document.getElementById('corridor-carbon');
+
+  [btnAir, btnSea, btnLand].forEach(btn => {
+    if (btn) {
+      btn.className = 'corridor-tab-btn px-6 py-3.5 rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 text-xs font-black flex items-center gap-2 transition-all hover:scale-105';
+    }
+  });
+
+  if (mode === 'air') {
+    if (btnAir) btnAir.className = 'corridor-tab-btn active px-6 py-3.5 rounded-full bg-black text-white text-xs font-black flex items-center gap-2 transition-all shadow-lg hover:scale-105';
+    if (speedEl) speedEl.textContent = '24 - 48 Hours';
+    if (customsEl) customsEl.textContent = 'Express Fast-Track WCO';
+    if (carbonEl) carbonEl.innerHTML = 'Certified <span class="text-[#42e61a]">Low-Emission Charter</span>';
+    showToast('Air Priority Vector Selected');
+  } else if (mode === 'sea') {
+    if (btnSea) btnSea.className = 'corridor-tab-btn active px-6 py-3.5 rounded-full bg-black text-white text-xs font-black flex items-center gap-2 transition-all shadow-lg hover:scale-105';
+    if (speedEl) speedEl.textContent = '12 - 18 Days';
+    if (customsEl) customsEl.textContent = 'Port-to-Port Pre-Cleared';
+    if (carbonEl) carbonEl.innerHTML = 'Certified <span class="text-[#42e61a]">Low-Emission Vessel</span>';
+    showToast('Ocean FCL Vector Selected');
+  } else if (mode === 'land') {
+    if (btnLand) btnLand.className = 'corridor-tab-btn active px-6 py-3.5 rounded-full bg-black text-white text-xs font-black flex items-center gap-2 transition-all shadow-lg hover:scale-105';
+    if (speedEl) speedEl.textContent = '24 - 72 Hours';
+    if (customsEl) customsEl.textContent = 'GCC Cross-Border Seal Approval';
+    if (carbonEl) carbonEl.innerHTML = 'Certified <span class="text-[#42e61a]">Eco-Route Telemetry</span>';
+    showToast('GCC Land Vector Selected');
+  }
+}
+
+window.selectCorridorMode = selectCorridorMode;
+
 // Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
   renderOperations();
