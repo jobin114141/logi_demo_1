@@ -80,9 +80,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (el) observer.observe(el);
   });
 
-  // Initialize Counter Animations on Scroll
+  // Initialize Counter Animations & Fast Scroll Reveal
   initScrollCounters();
+  initScrollReveal();
 });
+
+function initScrollReveal() {
+  const revealElements = document.querySelectorAll('.scroll-reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+}
 
 // Mobile nav toggle
 function toggleMobileNav() {
